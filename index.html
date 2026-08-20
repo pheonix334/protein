@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#B23A2F">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.googletagservices.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://www.google.com https://pagead2.googlesyndication.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P41HN02DDV"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6021714937287056"
+     crossorigin="anonymous"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P41HN02DDV');
+</script>
+<title>Protein Intake Calculator &mdash; Free Daily Protein Needs by Goal</title>
+<meta name="description" content="Free protein intake calculator. Find how much protein you should eat per day based on your body weight and goal — general health, muscle building, weight loss, or endurance training — with a per-meal breakdown.">
+<meta property="og:title" content="Free Protein Intake Calculator | Healthy Life Scale">
+<meta property="og:description" content="Find your daily protein target based on body weight and goal in seconds.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://protein.healthylifescale.com/">
+<meta property="og:image" content="https://healthylifescale.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Healthy Life Scale">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Protein Intake Calculator | Healthy Life Scale">
+<meta name="twitter:description" content="Find your daily protein target based on body weight and goal in seconds.">
+<meta name="twitter:image" content="https://healthylifescale.com/og-image.png">
+<link rel="canonical" href="https://protein.healthylifescale.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --paper:#FAF7F0; --paper-raised:#FFFFFF; --ink:#191918; --ink-soft:#585448;
+    --muted:#8A8577; --protein:#B23A2F; --carb:#C08A17; --fat:#5C6B2E; --fiber:#3A6B6B;
+    --danger:#B23A2F; --hair:#DEDACD;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; }
+  #root{ max-width:660px; margin:0 auto; padding:28px 18px 80px; }
+
+  .site-header{ position:sticky; top:0; z-index:100; background:var(--paper); border-bottom:1.5px solid var(--ink); margin-bottom:22px; padding:14px 0; }
+  #resultCard, #bmrLine, #resultBanner, #ccResults, #resultLabel{ scroll-margin-top: 80px; }
+  .site-header-inner{ display:flex; align-items:center; justify-content:space-between; position:relative; }
+  .site-logo{ display:flex; align-items:center; gap:7px; font-family:'Archivo Black',sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:-0.01em; color:var(--ink); text-decoration:none; white-space:nowrap; }
+  .site-logo .logo-icon{ flex-shrink:0; display:block; }
+
+  .current-page{ font-family:'Space Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.03em; color:var(--muted); display:none; }
+
+  .tools-dropdown{ position:relative; }
+  .tools-btn{
+    display:flex; align-items:center; gap:7px; font-family:'Space Mono',monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:0.03em; background:var(--ink); color:var(--paper);
+    border:1.5px solid var(--ink); padding:9px 14px; border-radius:3px; cursor:pointer;
+    transition:background-color 0.15s ease;
+  }
+  .tools-btn:hover{ background:#33332E; }
+  .tools-btn .chevron{ transition:transform 0.15s ease; flex-shrink:0; }
+  .tools-btn[aria-expanded="true"] .chevron{ transform:rotate(180deg); }
+
+  .tools-menu{
+    display:none; position:absolute; top:calc(100% + 10px); right:0; width:320px; max-width:calc(100vw - 36px);
+    background:var(--paper-raised); border:1.5px solid var(--ink); box-shadow:0 10px 26px rgba(26,26,22,0.16);
+    padding:8px; z-index:200; max-height:70vh; overflow-y:auto;
+  }
+  .tools-menu.open{ display:block; }
+  .tools-menu-label{ font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); padding:8px 10px 4px; }
+  .tools-menu a{ display:block; padding:10px; border-radius:3px; text-decoration:none; color:var(--ink); border-bottom:1px solid var(--hair); }
+  .tools-menu a:last-child{ border-bottom:none; }
+  .tools-menu a:hover{ background:var(--paper); }
+  .tools-menu .tm-name{ font-weight:700; font-size:13px; margin-bottom:2px; }
+  .tools-menu .tm-desc{ font-size:11px; color:var(--ink-soft); line-height:1.45; }
+
+  @media (min-width:640px){
+    .current-page{ display:block; }
+  }
+
+  .brand{ margin-bottom:22px; }
+  .brand h1{ font-family:'Archivo Black',sans-serif; font-size:25px; letter-spacing:-0.02em; margin:0; text-transform:uppercase; }
+  .brand .sub{ font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:0.04em; }
+
+  .card{ background:var(--paper-raised); border:1.5px solid var(--ink); padding:20px; margin-bottom:20px; }
+  .card h3{ font-family:'Space Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 14px; color:var(--ink-soft); }
+
+  .unit-toggle{ display:flex; border:1.5px solid var(--ink); border-radius:2px; overflow:hidden; margin-bottom:16px; width:fit-content; }
+  .unit-toggle button{ font-family:'Space Mono',monospace; font-size:11.5px; text-transform:uppercase; padding:7px 14px; border:none; background:var(--paper-raised); color:var(--ink); cursor:pointer; }
+  .unit-toggle button.active{ background:var(--ink); color:var(--paper); }
+
+  .gender-toggle{ display:flex; border:1.5px solid var(--ink); border-radius:2px; overflow:hidden; margin-bottom:16px; width:fit-content; }
+  .gender-toggle button{ font-family:'Space Mono',monospace; font-size:11.5px; text-transform:uppercase; padding:8px 16px; border:none; background:var(--paper-raised); color:var(--ink); cursor:pointer; }
+  .gender-toggle button.active{ background:var(--ink); color:var(--paper); }
+
+    .field-row{ display:flex; flex-direction:column; gap:10px; margin-bottom:10px; }
+  .field{ display:flex; align-items:center; gap:12px; }
+  .field label{ flex:0 0 96px; font-size:11px; color:var(--muted); font-family:'Space Mono',monospace; margin-bottom:0; text-transform:uppercase; letter-spacing:0.03em; }
+  .field input, .field select{ flex:1; min-width:0; padding:9px 10px; border:1.5px solid var(--hair); border-radius:2px; font-family:'Inter',sans-serif; font-size:14px; background:var(--paper); color:var(--ink); }
+  .field input:focus, .field select:focus{ outline:2px solid var(--protein); outline-offset:1px; border-color:var(--protein); }
+  @media (max-width:340px){
+    .field{ flex-direction:column; align-items:stretch; gap:4px; }
+    .field label{ flex:none; }
+  }
+  .field-optional-note{ font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); margin-top:-6px; margin-bottom:12px; }
+
+  .calc-btn{ background:var(--ink); color:var(--paper); border:none; padding:12px 20px; font-family:'Space Mono',monospace; font-size:12.5px; text-transform:uppercase; letter-spacing:0.04em; cursor:pointer; border-radius:2px; width:100%; margin-top:6px; }
+  .calc-btn:hover{ background:var(--protein); }
+
+  /* Results: BMR line */
+  .bmr-line{ display:none; font-family:'Space Mono',monospace; font-size:12.5px; color:var(--ink-soft); text-align:center; margin-bottom:6px; }
+  .bmr-line.show{ display:block; }
+  .bmr-line b{ color:var(--ink); }
+  .formula-badge{ display:none; text-align:center; font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); margin-bottom:16px; }
+  .formula-badge.show{ display:block; }
+  .formula-badge b{ color:var(--fiber); }
+
+  /* Quick stats row: BMI + ideal weight snapshot */
+  .quickstats{ display:none; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+  .quickstats.show{ display:grid; }
+  .quickstat-card{ background:var(--paper-raised); border:1.5px solid var(--hair); padding:14px; text-align:center; }
+  .quickstat-card .qs-label{ font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); margin-bottom:6px; }
+  .quickstat-card .qs-value{ font-family:'Space Mono',monospace; font-weight:700; font-size:19px; }
+  .quickstat-card .qs-sub{ font-size:11px; color:var(--ink-soft); margin-top:3px; }
+  @media (max-width:480px){ .quickstats{ grid-template-columns:1fr; } }
+
+  /* Activity level comparison table */
+  .activity-table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .activity-table th{ font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); text-align:left; padding:6px 4px; border-bottom:1.5px solid var(--ink); }
+  .activity-table td{ padding:8px 4px; border-bottom:1px solid var(--hair); }
+  .activity-table tr:last-child td{ border-bottom:none; }
+  .activity-table td.cal-col{ font-family:'Space Mono',monospace; text-align:right; font-weight:700; }
+  .activity-table tr.selected-row{ background:var(--paper); }
+  .activity-table tr.selected-row td{ color:var(--fiber); }
+
+  /* Ideal weight table */
+  .idealweight-table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .idealweight-table td{ padding:7px 4px; border-bottom:1px solid var(--hair); }
+  .idealweight-table tr:last-child td{ border-bottom:none; }
+  .idealweight-table td.iw-val{ font-family:'Space Mono',monospace; text-align:right; font-weight:700; }
+  .idealweight-table td.iw-year{ color:var(--muted); font-size:11.5px; }
+  .idealweight-range{ font-family:'Space Mono',monospace; font-weight:700; font-size:20px; text-align:center; margin:2px 0 12px; color:var(--fiber); }
+
+  /* Three calorie target cards */
+  .targets-grid{ display:none; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:20px; }
+  .targets-grid.show{ display:grid; }
+  .target-card{ background:var(--paper-raised); border:2px solid var(--ink); padding:14px 10px; text-align:center; }
+  .target-card.maintain{ border-color:var(--fiber); }
+  .target-card.loss{ border-color:var(--protein); }
+  .target-card.gain{ border-color:var(--carb); }
+  .target-card .tc-label{ font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); margin-bottom:6px; }
+  .target-card .tc-cal{ font-family:'Space Mono',monospace; font-weight:700; font-size:22px; line-height:1; }
+  .target-card .tc-sub{ font-family:'Space Mono',monospace; font-size:9.5px; color:var(--muted); margin-top:5px; }
+  .target-card .tc-select{ margin-top:10px; width:100%; background:none; border:1.5px solid var(--ink); color:var(--ink); padding:5px; font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; cursor:pointer; border-radius:2px; }
+  .target-card .tc-select:hover{ background:var(--ink); color:var(--paper); }
+  .target-card .tc-select.selected{ background:var(--ink); color:var(--paper); }
+
+  @media (max-width:480px){
+    .targets-grid{ grid-template-columns:1fr; gap:10px; }
+  }
+
+  /* Macro calculator */
+  .macro-card{ display:none; }
+  .macro-card.show{ display:block; }
+  .macro-basis{ font-family:'Space Mono',monospace; font-size:11.5px; color:var(--ink-soft); margin-bottom:14px; }
+  .macro-basis b{ color:var(--ink); }
+  .style-toggle{ display:flex; border:1.5px solid var(--ink); border-radius:2px; overflow:hidden; margin-bottom:18px; }
+  .style-toggle button{ flex:1; font-family:'Space Mono',monospace; font-size:10.5px; text-transform:uppercase; padding:9px 4px; border:none; background:var(--paper-raised); color:var(--ink); cursor:pointer; border-right:1px solid var(--ink); }
+  .style-toggle button:last-child{ border-right:none; }
+  .style-toggle button.active{ background:var(--ink); color:var(--paper); }
+
+  .macro-row{ display:flex; align-items:center; padding:10px 0; border-bottom:1px dashed var(--hair); }
+  .macro-row:last-child{ border-bottom:none; }
+  .macro-swatch{ width:12px; height:12px; border-radius:50%; margin-right:10px; flex-shrink:0; }
+  .macro-row .mr-name{ flex:1; font-weight:600; font-size:13.5px; }
+  .macro-row .mr-pct{ font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); width:40px; text-align:right; }
+  .macro-row .mr-grams{ font-family:'Space Mono',monospace; font-weight:700; font-size:15px; width:70px; text-align:right; }
+
+  .use-goal-btn{ background:var(--ink); color:var(--paper); border:none; padding:11px 20px; font-family:'Space Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.04em; cursor:pointer; border-radius:2px; width:100%; margin-top:16px; }
+  .use-goal-btn:hover{ background:var(--fiber); }
+  .use-goal-btn.done{ background:var(--fiber); }
+
+  .disclaimer{ font-family:'Space Mono',monospace; font-size:10.5px; color:var(--muted); margin-top:18px; line-height:1.6; }
+  .howworks-list{ margin:0 0 14px; padding-left:20px; font-size:13.5px; line-height:1.75; color:var(--ink-soft); }
+  .howworks-list li{ margin-bottom:8px; }
+  .howworks-list li b{ color:var(--ink); }
+  .howworks-list li:last-child{ margin-bottom:0; }
+  .howworks-note{ font-size:12.5px; color:var(--ink-soft); border-top:1px solid var(--hair); padding-top:12px; margin:0; line-height:1.6; }
+  .explore-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .explore-card{ background:var(--paper-raised); border:1.5px solid var(--hair); padding:13px 14px; text-decoration:none; color:var(--ink); display:block; transition:border-color 0.15s ease, background-color 0.15s ease; }
+  .explore-card:hover{ border-color:var(--ink); background:var(--paper); }
+  .explore-card .ec-name{ font-weight:700; font-size:13.5px; margin-bottom:4px; }
+  .explore-card .ec-desc{ font-size:11.5px; color:var(--ink-soft); line-height:1.45; margin-bottom:8px; }
+  .explore-card .ec-arrow{ font-family:'Space Mono',monospace; font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.03em; }
+  @media (max-width:520px){ .explore-grid{ grid-template-columns:1fr; } }
+
+  .site-footer{ margin-top:30px; border-top:1.5px solid var(--ink); padding-top:26px; }
+  .footer-about h3{ font-family:'Archivo Black',sans-serif; font-size:15px; text-transform:uppercase; letter-spacing:-0.01em; margin:0 0 10px; }
+  .footer-about p{ font-size:12.5px; line-height:1.75; color:var(--ink-soft); margin:0 0 18px; max-width:560px; }
+  .footer-links-title{ font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); margin-bottom:10px; }
+  .footer-links{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px 16px; margin-bottom:20px; }
+  .footer-links a{ font-size:11.5px; color:var(--protein); text-decoration:underline; text-underline-offset:2px; }
+  .footer-links a:hover{ color:var(--ink); text-decoration:none; }
+    .footer-legal{ font-family:'Space Mono',monospace; font-size:10.5px; color:var(--muted); margin-bottom:10px; }
+  .footer-legal a{ color:var(--ink-soft); text-decoration:underline; text-underline-offset:2px; }
+  .footer-legal a:hover{ color:var(--ink); }
+  .footer-legal .fl-dot{ margin:0 8px; color:var(--hair); }
+
+  .footer-bottom{ font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); border-top:1px solid var(--hair); padding-top:14px; line-height:1.7; }
+  @media (max-width:520px){ .footer-links{ grid-template-columns:1fr 1fr; } }
+
+  .faq-item{ border-bottom:1px solid var(--hair); }
+  .faq-item:last-child{ border-bottom:none; }
+  .faq-q{ width:100%; text-align:left; background:none; border:none; padding:14px 0; font-weight:700; font-size:13.5px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; color:var(--ink); font-family:'Inter',sans-serif; }
+  .faq-q .faq-icon{ transition:transform 0.15s ease; flex-shrink:0; margin-left:10px; font-family:'Space Mono',monospace; }
+  .faq-q.open .faq-icon{ transform:rotate(45deg); }
+  .faq-a{ display:none; padding:0 0 14px; font-size:13px; line-height:1.65; color:var(--ink-soft); }
+  .faq-a.open{ display:block; }
+
+  .result-card{ background:var(--paper-raised); border:3px solid var(--ink); padding:22px; display:none; margin-bottom:20px; text-align:center; }
+  .result-card.show{ display:block; }
+  .pc-value{ font-family:'Space Mono',monospace; font-weight:700; font-size:44px; color:var(--protein); line-height:1; }
+  .pc-unit{ font-size:16px; font-weight:400; }
+  .pc-sub{ font-family:'Space Mono',monospace; font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.03em; margin-top:6px; }
+  .pc-range{ font-size:12.5px; color:var(--ink-soft); margin-top:10px; }
+  .pc-meals{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:18px 0 4px; }
+  .pc-meal-card{ background:var(--paper); border:1.5px solid var(--hair); padding:10px 6px; text-align:center; }
+  .pc-meal-card .pm-label{ font-family:'Space Mono',monospace; font-size:9px; color:var(--muted); text-transform:uppercase; }
+  .pc-meal-card .pm-val{ font-family:'Space Mono',monospace; font-weight:700; font-size:15px; margin-top:4px; }
+  .pc-goal-table{ width:100%; border-collapse:collapse; font-size:12.5px; margin-top:16px; text-align:left; }
+  .pc-goal-table th{ font-family:'Space Mono',monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted); text-align:left; padding:6px 4px; border-bottom:1.5px solid var(--ink); }
+  .pc-goal-table td{ padding:8px 4px; border-bottom:1px solid var(--hair); }
+  .pc-goal-table tr:last-child td{ border-bottom:none; }
+  .pc-goal-table tr.hl{ background:var(--paper); font-weight:700; }
+  .cc-note{ background:var(--paper); border-left:3px solid var(--carb); padding:10px 12px; font-size:11.5px; color:var(--ink-soft); line-height:1.55; margin-top:16px; text-align:left; }
+  .cc-crosslink{ background:#EAECF5; border-left:3px solid #5C6B9E; padding:12px 14px; margin-top:14px; font-size:12.5px; line-height:1.6; color:var(--ink-soft); text-align:left; }
+  .cc-crosslink a{ color:#5C6B9E; font-weight:700; }
+  @media (max-width:380px){ .pc-meals{ grid-template-columns:repeat(2,1fr); } }
+
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much protein should I eat per day?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your goal and activity level. The RDA minimum is 0.8g per kg of body weight, but research generally supports higher intakes — around 1.2-1.6g/kg for general fitness, 1.6-2.2g/kg for muscle building, and up to 2.4g/kg during a weight-loss phase to help preserve muscle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is more protein always better?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Research shows diminishing returns for muscle protein synthesis above roughly 1.6-2.2g/kg for most people, even with intense training. Very high intakes beyond that mostly just add calories rather than additional benefit for most healthy adults."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why would I eat more protein while losing weight?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "During a calorie deficit, higher protein intake (often 1.8-2.4g/kg) helps preserve lean muscle mass that might otherwise be lost alongside fat, and tends to be more satiating, which can help with adherence to a calorie deficit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use my actual weight or a goal weight?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For most people, current body weight is the standard basis. If you carry significant excess body fat, some approaches use lean body mass or an adjusted weight instead, since fat tissue needs relatively little protein to maintain compared to muscle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to hit my protein target every single day?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No — what matters most is your average intake over days and weeks, not perfect precision every single day. Getting close most days is enough for the vast majority of people."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div id="root">
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="https://healthylifescale.com" class="site-logo">
+        <svg class="logo-icon" width="24" height="24" viewBox="0 0 100 100" role="img" aria-hidden="true">
+          <rect x="2" y="2" width="96" height="96" rx="18" fill="var(--protein)"/>
+          <polyline points="16,50 30,50 38,28 50,74 61,36 70,50 84,50" fill="none" stroke="var(--paper)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Healthy Life Scale
+      </a>
+      <span class="current-page">Protein Intake</span>
+      <div class="tools-dropdown">
+        <button class="tools-btn" id="toolsBtn" aria-haspopup="true" aria-expanded="false">
+          Other Tools
+          <svg class="chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 3L5 7L9 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="tools-menu" id="toolsMenu">
+          <div class="tools-menu-label">Other tools</div>
+        <a href="https://healthylifescale.com">
+          <div class="tm-name">Calorie Tracker</div>
+          <div class="tm-desc">Search 240+ foods and track daily calories, protein, carbs, fat, fiber, sugar & sodium.</div>
+        </a>
+        <a href="https://bmi.healthylifescale.com">
+          <div class="tm-name">BMI Calculator</div>
+          <div class="tm-desc">Check your Body Mass Index and healthy weight range.</div>
+        </a>
+        <a href="https://bodyfat.healthylifescale.com">
+          <div class="tm-name">Body Fat % Calculator</div>
+          <div class="tm-desc">Estimate body fat using the Navy tape-measure method.</div>
+        </a>
+        <a href="https://waisttohip.healthylifescale.com">
+          <div class="tm-name">Waist-to-Hip Ratio</div>
+          <div class="tm-desc">Check your ratio against WHO risk categories.</div>
+        </a>
+        <a href="https://framesize.healthylifescale.com">
+          <div class="tm-name">Body Frame Size Calculator</div>
+          <div class="tm-desc">Find your small, medium, or large frame size.</div>
+        </a>
+        <a href="https://bri.healthylifescale.com">
+          <div class="tm-name">Body Roundness Index</div>
+          <div class="tm-desc">A newer alternative to BMI using waist, height, and hip.</div>
+        </a>
+        <a href="https://water.healthylifescale.com">
+          <div class="tm-name">Water Intake</div>
+          <div class="tm-desc">Get a daily hydration goal and log glasses as you drink.</div>
+        </a>
+        <a href="https://bmr.healthylifescale.com">
+          <div class="tm-name">BMR / TDEE</div>
+          <div class="tm-desc">Find your daily calorie needs and a personalized macro split.</div>
+        </a>
+        <a href="https://caloriesburned.healthylifescale.com">
+          <div class="tm-name">Calories Burned Calculator</div>
+          <div class="tm-desc">See how many calories you burned during any activity.</div>
+        </a>
+        <a href="https://sleep.healthylifescale.com">
+          <div class="tm-name">Sleep Calculator</div>
+          <div class="tm-desc">Find your ideal bedtime or wake-up time by sleep cycle.</div>
+        </a>
+        <a href="https://nap.healthylifescale.com">
+          <div class="tm-name">Nap Calculator</div>
+          <div class="tm-desc">Find your ideal nap length and wake-up time.</div>
+        </a>
+        <a href="https://duedate.healthylifescale.com">
+          <div class="tm-name">Pregnancy Due Date</div>
+          <div class="tm-desc">Estimate your due date and track gestational age week by week.</div>
+        </a>
+        <a href="https://pregnancyweight.healthylifescale.com">
+          <div class="tm-name">Pregnancy Weight Gain</div>
+          <div class="tm-desc">See your recommended pregnancy weight gain range.</div>
+        </a>
+        <a href="https://period.healthylifescale.com">
+          <div class="tm-name">Period Tracker</div>
+          <div class="tm-desc">Estimate your next period, ovulation day, and fertile window.</div>
+        </a>
+        <a href="https://height.healthylifescale.com">
+          <div class="tm-name">Height Predictor</div>
+          <div class="tm-desc">Estimate a child's adult height from parents' heights.</div>
+        </a>
+        <a href="https://bloodpressure.healthylifescale.com">
+          <div class="tm-name">Blood Pressure Calculator</div>
+          <div class="tm-desc">Check your reading against AHA blood pressure categories.</div>
+        </a>
+        <a href="https://heartage.healthylifescale.com">
+          <div class="tm-name">Heart Age Calculator</div>
+          <div class="tm-desc">See how lifestyle factors compare your heart age to your real age.</div>
+        </a>
+        <a href="https://ascvd.healthylifescale.com">
+          <div class="tm-name">ASCVD Risk Calculator</div>
+          <div class="tm-desc">Estimate your 10-year heart disease and stroke risk tier.</div>
+        </a>
+        <a href="https://heartratezone.healthylifescale.com">
+          <div class="tm-name">Target Heart Rate Zone</div>
+          <div class="tm-desc">Find your personalized training zones using the Karvonen formula.</div>
+        </a>
+        <a href="https://heartraterecovery.healthylifescale.com">
+          <div class="tm-name">Heart Rate Recovery</div>
+          <div class="tm-desc">Measure your post-exercise cardiovascular fitness.</div>
+        </a>
+        <a href="https://breathholding.healthylifescale.com">
+          <div class="tm-name">Breath Holding Test</div>
+          <div class="tm-desc">Time how long you can hold your breath and see how it compares.</div>
+        </a>
+        <a href="https://pace.healthylifescale.com">
+          <div class="tm-name">Running Pace Calculator</div>
+          <div class="tm-desc">Calculate your pace, speed, and predicted race times.</div>
+        </a>
+        <a href="https://symptoms.healthylifescale.com">
+          <div class="tm-name">Symptom Checker</div>
+          <div class="tm-desc">Get an urgency level based on your symptoms, age, and history.</div>
+        </a>
+        <a href="https://mentalhealth.healthylifescale.com">
+          <div class="tm-name">Mental Health Survey</div>
+          <div class="tm-desc">A private PHQ-9 / GAD-7 depression & anxiety screening.</div>
+        </a>
+        <a href="https://fertility.healthylifescale.com">
+          <div class="tm-name">Fertility Checklist</div>
+          <div class="tm-desc">Check lifestyle factors linked to sperm health and track over time.</div>
+        </a>
+        <a href="https://gripstrength.healthylifescale.com">
+          <div class="tm-name">Grip Strength Calculator</div>
+          <div class="tm-desc">Benchmark your handgrip strength by age and sex.</div>
+        </a>
+        <a href="https://onerepmax.healthylifescale.com">
+          <div class="tm-name">One-Rep Max Calculator</div>
+          <div class="tm-desc">Estimate your 1RM using the Epley and Brzycki formulas.</div>
+        </a>
+        <a href="https://pushuptest.healthylifescale.com">
+          <div class="tm-name">Push-Up / Sit-Up Test</div>
+          <div class="tm-desc">Benchmark your push-up or sit-up count by age and sex.</div>
+        </a>
+        <a href="https://bac.healthylifescale.com">
+          <div class="tm-name">BAC Calculator</div>
+          <div class="tm-desc">Educational blood alcohol content estimate.</div>
+        </a>
+        <a href="https://a1c.healthylifescale.com">
+          <div class="tm-name">A1C Converter</div>
+          <div class="tm-desc">Convert between A1C and average blood sugar.</div>
+        </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <script>
+  (function(){
+    var btn = document.getElementById('toolsBtn');
+    var menu = document.getElementById('toolsMenu');
+    if(!btn || !menu) return;
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    document.addEventListener('click', function(e){
+      if(!menu.classList.contains('open')) return;
+      if(!menu.contains(e.target) && !btn.contains(e.target)){
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && menu.classList.contains('open')){
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.focus();
+      }
+    });
+  })();
+  </script>
+
+  <div class="brand">
+    <h1>Protein Intake Calculator</h1>
+    <div class="sub">Daily protein target by body weight and goal</div>
+  </div>
+
+  <div class="card">
+    <div class="gradient-bar"></div>
+    <h3>Your details</h3>
+    <div class="unit-toggle">
+      <button id="unitKg" class="active">Metric (kg)</button>
+      <button id="unitLb">Imperial (lb)</button>
+    </div>
+    <div class="field-row">
+      <div class="field"><label for="weightVal">Weight</label><input type="number" id="weightVal" placeholder="e.g. 70"></div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label for="goalSelect">Goal</label>
+        <select id="goalSelect">
+          <option value="sedentary">General health (sedentary)</option>
+          <option value="fitness" selected>General fitness / recreational exercise</option>
+          <option value="muscle">Muscle building / strength training</option>
+          <option value="loss">Weight loss (preserve muscle in a deficit)</option>
+          <option value="endurance">Endurance training (running, cycling, etc.)</option>
+          <option value="older">Older adult (65+)</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="calc-btn" id="calcBtn">Calculate Protein Target</button>
+  </div>
+
+  <div class="result-card" id="resultCard">
+    <div class="pc-value"><span id="pcValue">0</span><span class="pc-unit"> g/day</span></div>
+    <div class="pc-sub">recommended daily protein</div>
+    <div class="pc-range" id="pcRange"></div>
+
+    <div class="pc-meals" id="pcMeals"></div>
+
+    <h3 style="margin-top:20px; text-align:left;">By goal, for your weight</h3>
+    <table class="pc-goal-table" id="pcGoalTable"></table>
+
+    <div class="cc-crosslink">Build this into a full day of eating with the <a href="https://bmr.healthylifescale.com">TDEE &amp; Macro Calculator</a> or log meals directly in the <a href="https://healthylifescale.com">Calorie Tracker</a>.</div>
+    <div class="cc-note">These are general ranges from population research, not individual prescriptions. People with kidney conditions should talk to a doctor before significantly increasing protein intake.</div>
+  </div>
+
+  <div class="card">
+    <h3>How it works</h3>
+    <ol class="howworks-list">
+      <li><b>Enter your body weight</b> in kg or lb.</li>
+      <li><b>Pick your goal.</b> Each goal maps to a research-backed g/kg range — higher for muscle building or weight loss, lower for general health or endurance training.</li>
+      <li><b>We calculate grams per day</b> and split it across 4 meals as a starting point for spacing your intake through the day.</li>
+    </ol>
+    <p class="howworks-note">Protein needs vary by individual. These ranges reflect general research findings, not a personalized prescription.</p>
+  </div>
+
+  <div class="card">
+    <h3>Frequently asked questions</h3>
+    <div class="faq-item">
+      <button class="faq-q">How much protein should I eat per day?<span class="faq-icon">+</span></button>
+      <div class="faq-a">It depends on your goal. The RDA minimum is 0.8g per kg of body weight, but research generally supports higher intakes — around 1.2-1.6g/kg for general fitness, 1.6-2.2g/kg for muscle building, and up to 2.4g/kg during a weight-loss phase.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is more protein always better?<span class="faq-icon">+</span></button>
+      <div class="faq-a">No. Research shows diminishing returns for muscle protein synthesis above roughly 1.6-2.2g/kg for most people, even with intense training. Very high intakes beyond that mostly just add calories.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Why would I eat more protein while losing weight?<span class="faq-icon">+</span></button>
+      <div class="faq-a">During a calorie deficit, higher protein intake helps preserve lean muscle mass that might otherwise be lost alongside fat, and tends to be more satiating, which can help with adherence.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Should I use my actual weight or a goal weight?<span class="faq-icon">+</span></button>
+      <div class="faq-a">For most people, current body weight is the standard basis. If you carry significant excess body fat, some approaches use lean body mass instead, since fat tissue needs relatively little protein to maintain.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Do I need to hit my protein target every single day?<span class="faq-icon">+</span></button>
+      <div class="faq-a">No — what matters most is your average intake over days and weeks, not perfect precision every single day.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Explore other tools</h3>
+    <div class="explore-grid" id="exploreGrid">
+    <a href="https://bmr.healthylifescale.com" class="explore-card"><div class="ec-name">BMR / TDEE</div><div class="ec-desc">Find your daily calorie needs and a personalized macro split.</div><div class="ec-arrow">Open &rarr;</div></a>
+    <a href="https://healthylifescale.com" class="explore-card"><div class="ec-name">Calorie Tracker</div><div class="ec-desc">Search 240+ foods and track daily calories, protein, carbs, fat, fiber, sugar & sodium.</div><div class="ec-arrow">Open &rarr;</div></a>
+    <a href="https://onerepmax.healthylifescale.com" class="explore-card"><div class="ec-name">One-Rep Max Calculator</div><div class="ec-desc">Estimate your 1RM using the Epley and Brzycki formulas.</div><div class="ec-arrow">Open &rarr;</div></a>
+    <a href="https://pushuptest.healthylifescale.com" class="explore-card"><div class="ec-name">Push-Up / Sit-Up Test</div><div class="ec-desc">Benchmark your push-up or sit-up count by age and sex.</div><div class="ec-arrow">Open &rarr;</div></a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-about">
+      <h3>About Healthy Life Scale</h3>
+      <p>Healthy Life Scale is a collection of free health and wellness calculators &mdash; a calorie and macro tracker, BMI calculator, water intake calculator, TDEE calculator, sleep calculator, pregnancy due date and weight gain calculators, period and ovulation tracker, child height predictor, blood pressure calculator, heart age calculator, breath holding test, ASCVD heart risk calculator, symptom checker, and a PHQ-9/GAD-7 mental health survey. Every tool is free to use, works without an account or app download, and saves your data privately on your own device rather than a server. Built for anyone who wants quick, practical health calculators without ads, logins, or paywalls.</p>
+    </div>
+    <div class="footer-links-title">All tools</div>
+    <div class="footer-links">
+      <a href="https://healthylifescale.com">Calorie Tracker</a>
+      <a href="https://bmi.healthylifescale.com">BMI Calculator</a>
+      <a href="https://bodyfat.healthylifescale.com">Body Fat % Calculator</a>
+      <a href="https://waisttohip.healthylifescale.com">Waist-to-Hip Ratio Calculator</a>
+      <a href="https://framesize.healthylifescale.com">Body Frame Size Calculator</a>
+      <a href="https://bri.healthylifescale.com">Body Roundness Index Calculator</a>
+      <a href="https://water.healthylifescale.com">Water Intake Calculator</a>
+      <a href="https://bmr.healthylifescale.com">TDEE & Macro Calculator</a>
+      <a href="https://protein.healthylifescale.com" style="font-weight:700;color:var(--ink);">Protein Intake Calculator</a>
+      <a href="https://caloriesburned.healthylifescale.com">Calories Burned Calculator</a>
+      <a href="https://sleep.healthylifescale.com">Sleep Calculator</a>
+      <a href="https://nap.healthylifescale.com">Nap Calculator</a>
+      <a href="https://duedate.healthylifescale.com">Pregnancy Due Date Calculator</a>
+      <a href="https://pregnancyweight.healthylifescale.com">Pregnancy Weight Gain Calculator</a>
+      <a href="https://period.healthylifescale.com">Period & Ovulation Tracker</a>
+      <a href="https://height.healthylifescale.com">Child Height Predictor</a>
+      <a href="https://bloodpressure.healthylifescale.com">Blood Pressure Calculator</a>
+      <a href="https://heartage.healthylifescale.com">Heart Age Calculator</a>
+      <a href="https://ascvd.healthylifescale.com">ASCVD Risk Calculator</a>
+      <a href="https://heartratezone.healthylifescale.com">Target Heart Rate Zone</a>
+      <a href="https://heartraterecovery.healthylifescale.com">Heart Rate Recovery Calculator</a>
+      <a href="https://breathholding.healthylifescale.com">Breath Holding Test</a>
+      <a href="https://pace.healthylifescale.com">Running Pace Calculator</a>
+      <a href="https://symptoms.healthylifescale.com">Symptom Checker</a>
+      <a href="https://mentalhealth.healthylifescale.com">Mental Health Survey</a>
+      <a href="https://fertility.healthylifescale.com">Fertility Checklist</a>
+      <a href="https://gripstrength.healthylifescale.com">Grip Strength Calculator</a>
+      <a href="https://onerepmax.healthylifescale.com">One-Rep Max Calculator</a>
+      <a href="https://pushuptest.healthylifescale.com">Push-Up / Sit-Up Test Benchmark</a>
+      <a href="https://bac.healthylifescale.com">BAC Calculator</a>
+      <a href="https://a1c.healthylifescale.com">A1C / Blood Sugar Converter</a>
+    </div>
+    <div class="footer-legal">
+      <a href="https://healthylifescale.com/privacy-policy.html">Privacy Policy</a><span class="fl-dot">&middot;</span><a href="https://healthylifescale.com/about.html">About</a>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Healthy Life Scale. All tools are educational and provide general estimates only &mdash; they are not medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider for medical concerns.
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const answer = btn.nextElementSibling;
+      const isOpen = answer.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+      btn.querySelector('.faq-icon').textContent = isOpen ? '\u2212' : '+';
+    });
+  });
+
+  let units = 'kg';
+  $('unitKg').addEventListener('click', ()=>{
+    units = 'kg';
+    $('unitKg').classList.add('active'); $('unitLb').classList.remove('active');
+    $('weightVal').placeholder = 'e.g. 70';
+  });
+  $('unitLb').addEventListener('click', ()=>{
+    units = 'lb';
+    $('unitLb').classList.add('active'); $('unitKg').classList.remove('active');
+    $('weightVal').placeholder = 'e.g. 155';
+  });
+
+  const GOALS = {
+    sedentary:  { name:'General health (sedentary)', low:0.8, high:1.0 },
+    fitness:    { name:'General fitness', low:1.2, high:1.6 },
+    muscle:     { name:'Muscle building', low:1.6, high:2.2 },
+    loss:       { name:'Weight loss (preserve muscle)', low:1.8, high:2.4 },
+    endurance:  { name:'Endurance training', low:1.2, high:1.4 },
+    older:      { name:'Older adult (65+)', low:1.0, high:1.5 }
+  };
+
+  $('calcBtn').addEventListener('click', ()=>{
+    const weightRaw = parseFloat($('weightVal').value);
+    const goalKey = $('goalSelect').value;
+    if(!weightRaw){ alert('Please enter your weight.'); return; }
+
+    const weightKg = units === 'lb' ? weightRaw / 2.20462 : weightRaw;
+    const goal = GOALS[goalKey];
+    const low = Math.round(weightKg * goal.low);
+    const high = Math.round(weightKg * goal.high);
+    const target = Math.round((low + high) / 2);
+
+    $('pcValue').textContent = target;
+    $('pcRange').textContent = `Range for your goal: ${low}\u2013${high} g/day (${goal.low}\u2013${goal.high} g per kg body weight)`;
+
+    $('pcMeals').innerHTML = [1,2,3,4].map(n => `
+      <div class="pc-meal-card">
+        <div class="pm-label">Meal ${n}</div>
+        <div class="pm-val">${Math.round(target/4)}g</div>
+      </div>`).join('');
+
+    $('pcGoalTable').innerHTML = '<tr><th>Goal</th><th style="text-align:right;">g/day</th></tr>' +
+      Object.keys(GOALS).map(key => {
+        const g = GOALS[key];
+        const gLow = Math.round(weightKg * g.low);
+        const gHigh = Math.round(weightKg * g.high);
+        const isSelected = key === goalKey;
+        return `<tr class="${isSelected ? 'hl' : ''}"><td>${g.name}${isSelected ? ' \u2713' : ''}</td><td style="text-align:right; font-family:'Space Mono',monospace;">${gLow}\u2013${gHigh}</td></tr>`;
+      }).join('');
+
+    $('resultCard').classList.add('show');
+    if($('resultCard').scrollIntoView){ $('resultCard').scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+})();
+</script>
